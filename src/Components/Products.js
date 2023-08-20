@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from 'react'
+import React, { useEffect } from 'react'
 import { add } from '../Store/cartSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchProduct } from '../Store/productSlice'
@@ -34,7 +34,7 @@ const Products = () => {
         // }
         // fetchData()
 
-    }, [btnName])
+    }, [dispatch])
 
     if(status === Status.LOADING )  {
         return <div className='loader'><ClockLoader color='green' /> </div>
