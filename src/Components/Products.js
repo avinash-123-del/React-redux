@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from 'react'
+import React, { useState } from 'react'
 import { add } from '../Store/cartSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchProduct } from '../Store/productSlice'
@@ -18,7 +18,7 @@ const Products = () => {
     // 'data : products' rename data as product
     const {data:products,status} = useSelector((state) => state.product)
 
-    useEffect(() => {
+    // useEffect(() => {
         //using reducer
         dispatch(fetchProduct())
 
@@ -32,7 +32,7 @@ const Products = () => {
         // }
         // fetchData()
 
-    }, [])
+    // }, [])
 
     if(status === Status.LOADING )  {
         return <div className='loader'><ClockLoader color='green' /> </div>
@@ -47,6 +47,7 @@ const Products = () => {
         // dispatch the action 
         // product is a payload
         dispatch(add(product))
+        setButtonName("Added")
     }
     
  
