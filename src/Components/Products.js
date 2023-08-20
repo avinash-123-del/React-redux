@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect,useState } from 'react'
 import { add } from '../Store/cartSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchProduct } from '../Store/productSlice'
@@ -6,7 +6,9 @@ import { Status } from '../Store/productSlice'
 import {ClockLoader} from 'react-spinners'
 const Products = () => {
 
-    const [buttonName,setButtonName] = useState('Add')
+    // const [buttonName,setButtonName] = useState('Add')
+
+    const btnName = "Add Item"
 
     // const baseUrl = 'https://fakestoreapi.com/products'
 
@@ -18,7 +20,7 @@ const Products = () => {
     // 'data : products' rename data as product
     const {data:products,status} = useSelector((state) => state.product)
 
-    // useEffect(() => {
+    useEffect(() => {
         //using reducer
         dispatch(fetchProduct())
 
@@ -32,7 +34,7 @@ const Products = () => {
         // }
         // fetchData()
 
-    // }, [])
+    }, [btnName])
 
     if(status === Status.LOADING )  {
         return <div className='loader'><ClockLoader color='green' /> </div>
@@ -44,10 +46,7 @@ const Products = () => {
     
 
     const handleAdd = (product) => {
-        // dispatch the action 
-        // product is a payload
         dispatch(add(product))
-        setButtonName("Added")
     }
     
  
@@ -64,7 +63,7 @@ const Products = () => {
                         <h5>{product.price}</h5>
                         <button
                             onClick={()=> handleAdd(product)}
-                            className='btn'>{buttonName==='Add' ? 'Add Item' : 'Added'}</button>
+                            className='btn'>{btnName}</button>
                     </div>
                 ))
             }
